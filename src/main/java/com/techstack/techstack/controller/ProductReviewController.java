@@ -18,10 +18,7 @@ public class ProductReviewController {
 
     private final ProductReviewService reviewService;
 
-    /**
-     * Endpoint to create a new review for a specific product.
-     * POST /api/products/123/reviews
-     */
+
     @PostMapping
     public ResponseEntity<ProductReviewDTO> createReview(
             @PathVariable Long productId,
@@ -30,10 +27,7 @@ public class ProductReviewController {
         return new ResponseEntity<>(createdReview, HttpStatus.CREATED);
     }
 
-    /**
-     * Endpoint to get all reviews for a specific product.
-     * GET /api/products/123/reviews
-     */
+
     @GetMapping
     public ResponseEntity<List<ProductReviewDTO>> getReviewsByProductId(@PathVariable Long productId) {
         List<ProductReviewDTO> reviews = reviewService.getReviewsByProductId(productId);

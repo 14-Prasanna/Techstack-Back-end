@@ -66,18 +66,13 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    // This is the helper method where the correction is made
     private ProductDTO mapToDTO(Product product) {
         ProductDTO productDTO = new ProductDTO();
         productDTO.setId(product.getId());
         productDTO.setName(product.getName());
         productDTO.setPrice(product.getPrice());
         productDTO.setStock(product.getStock());
-
-        // --- THIS IS THE CORRECTED LINE ---
-        // The method name now matches the field 'imageUrl' in both the entity and DTO.
-        productDTO.setImageUrl(product.getImageUrl());
-
+        productDTO.setImageData(product.getImageData()); // Mapping the byte array
         productDTO.setBrandName(product.getBrandName());
         productDTO.setModelName(product.getModelName());
         productDTO.setCategory(product.getCategory());

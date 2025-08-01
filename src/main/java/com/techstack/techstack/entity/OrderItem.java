@@ -26,8 +26,6 @@ public class OrderItem {
     @Column(nullable = false)
     private Integer quantity;
 
-    // CRITICAL: Store the price at the time of purchase.
-    // Do not rely on the Product's price, as it can change.
     @Column(name = "price_at_purchase", nullable = false)
     private Integer priceAtPurchase;
 }

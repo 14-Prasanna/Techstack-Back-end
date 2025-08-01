@@ -50,9 +50,8 @@ public class WishlistService {
                     return wishlistRepository.save(newWishlist);
                 });
 
-        // Prevent adding duplicate items
         if (wishlistItemRepository.existsByWishlistIdAndProductId(wishlist.getId(), productId)) {
-            return getWishlistByUserId(userId); // Item is already there, return current list
+            return getWishlistByUserId(userId);
         }
 
         WishlistItem wishlistItem = new WishlistItem();
@@ -73,12 +72,10 @@ public class WishlistService {
         WishlistItem itemToRemove = wishlistItemRepository.findById(wishlistItemId)
                 .orElseThrow(() -> new RuntimeException("Wishlist item not found"));
 
-        // Security check: ensure the item belongs to the user's wishlist
         if (!itemToRemove.getWishlist().getId().equals(wishlist.getId())) {
             throw new SecurityException("User does not have permission to remove this item");
         }
 
-        // This is handled by orphanRemoval=true in the Wishlist entity
         wishlist.getWishlistItems().remove(itemToRemove);
         wishlistRepository.save(wishlist);
 
@@ -88,8 +85,10 @@ public class WishlistService {
     private WishlistResponseDTO mapToDto(WishlistItem item) {
         Product product = item.getProduct();
         String imageUrl = null;
-        if (product.getImageUrl() != null && product.getImageUrl().length > 0) {
-            String base64Image = Base64.getEncoder().encodeToString(product.getImageUrl());
+        // --- THIS IS THE CORRECTED LINE ---
+        byte[] imageData = product.getImageData();
+        if (imageData != null && imageData.length > 0) {
+            String base64Image = Base64.getEncoder().encodeToString(imageData);
             imageUrl = "data:image/jpeg;base64," + base64Image;
         }
 

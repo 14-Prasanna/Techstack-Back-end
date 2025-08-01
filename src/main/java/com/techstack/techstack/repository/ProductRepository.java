@@ -18,15 +18,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByCategoryAndRatingGreaterThanEqualOrderByRatingDesc(String category, Double minRating);
     List<Product> findByCategoryAndBrandNameAndPriceBetween(String category, String brandName, Integer minPrice, Integer maxPrice);
 
-    /**
-     * Advanced search method.
-     * This query searches for a keyword in the product's name, category, or brand.
-     * It also filters the results by a list of brand names if provided.
-     *
-     * @param keyword The search term to look for in name, category, and brand.
-     * @param brands A list of brand names to filter by. Can be null or empty.
-     * @return A list of matching products.
-     */
+
     @Query("SELECT p FROM Product p WHERE " +
             "(:keyword IS NULL OR " +
             "LOWER(p.name) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +

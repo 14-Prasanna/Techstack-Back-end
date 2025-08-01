@@ -37,10 +37,7 @@ public class CartController {
         return ResponseEntity.ok(cartService.getCartByUserId(userId));
     }
 
-    /**
-     * This method is now valid because the corresponding method
-     * has been added to the CartService.
-     */
+
     @DeleteMapping
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Void> deleteCart() {

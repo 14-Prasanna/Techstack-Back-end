@@ -29,11 +29,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             new AntPathRequestMatcher("/api/products/**")
     );
 
-    /**
-     * This method prevents the filter from being applied to the public paths defined above.
-     * If the request URI matches an excluded path, this method returns true, and the
-     * doFilterInternal logic is skipped.
-     */
+
     @Override
     protected boolean shouldNotFilter(@NonNull HttpServletRequest request) throws ServletException {
         return excludedPaths.stream().anyMatch(p -> p.matches(request));

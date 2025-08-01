@@ -68,14 +68,10 @@ public class CartService {
         return mapToDto(cart);
     }
 
-    /**
-     * CORRECTED: This is the missing method that the CartController needs.
-     * It finds the user's active cart and deletes it if it exists.
-     */
     @Transactional
     public void deleteCart(Long userId) {
         cartRepository.findByUserIdAndStatus(userId, Cart.Status.ACTIVE)
-                .ifPresent(cart -> cartRepository.delete(cart));
+                .ifPresent(cartRepository::delete);
     }
 
     @Transactional
@@ -114,7 +110,8 @@ public class CartService {
                     itemDto.setQuantity(item.getQuantity());
                     itemDto.setPrice(item.getPrice());
 
-                    byte[] imageData = item.getProduct().getImageUrl();
+                    // --- THIS IS THE CORRECTED LINE ---
+                    byte[] imageData = item.getProduct().getImageData();
                     if (imageData != null && imageData.length > 0) {
                         String base64Image = Base64.getEncoder().encodeToString(imageData);
                         itemDto.setImageUrl("data:image/jpeg;base64," + base64Image);

@@ -10,15 +10,14 @@ import java.util.List;
 @Data
 public class CheckoutRequestDTO {
 
-    // --- What to Buy ---
-    // Option 1: Checkout from cart (provide a list of cart item IDs)
+
     private List<Long> cartItemIds;
 
-    // Option 2: Direct "Buy Now" (provide a product ID and quantity)
+
     private Long directProductId;
     private Integer directProductQuantity;
 
-    // --- Shipping Address ---
+
     @NotBlank(message = "Address Line 1 is required")
     private String addressLine1;
     private String addressLine2;
@@ -33,7 +32,7 @@ public class CheckoutRequestDTO {
     private String phoneNumber;
     private String alternativePhoneNumber;
 
-    // --- Payment ---
+
     @NotNull(message = "Payment method is required")
     private PaymentMethod paymentMethod;
 }

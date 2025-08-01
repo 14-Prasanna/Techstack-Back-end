@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WishlistItemRepository extends JpaRepository<WishlistItem, Long> {
-    // This helps prevent adding duplicate items
+
     boolean existsByWishlistIdAndProductId(Long wishlistId, Long productId);
 }

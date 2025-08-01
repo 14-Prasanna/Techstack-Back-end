@@ -31,10 +31,7 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    /**
-     * NEW: Global CORS Configuration Bean.
-     * This bean defines the CORS policy for the entire application and is used by Spring Security.
-     */
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();

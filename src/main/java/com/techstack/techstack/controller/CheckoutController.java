@@ -23,10 +23,7 @@ public class CheckoutController {
     private final CheckoutService checkoutService;
     private final UserRepository userRepository;
 
-    /**
-     * A single endpoint to handle both "Buy Now" and "Checkout from Cart".
-     * The service layer will determine the flow based on the request body content.
-     */
+
     @PostMapping
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<OrderResponseDTO> placeOrder(@Valid @RequestBody CheckoutRequestDTO request) {

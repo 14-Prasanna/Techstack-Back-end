@@ -19,12 +19,7 @@ public class ProductReviewService {
     private final ProductReviewRepository reviewRepository;
     private final ProductRepository productRepository;
 
-    /**
-     * Creates and saves a new review for a given product.
-     * @param productId The ID of the product to review.
-     * @param reviewDTO The review data transfer object.
-     * @return The created review as a DTO.
-     */
+
     @Transactional
     public ProductReviewDTO createReview(Long productId, ProductReviewDTO reviewDTO) {
         // 1. Find the product that this review belongs to.

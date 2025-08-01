@@ -2,8 +2,6 @@ package com.techstack.techstack.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.eclipse.angus.mail.iap.ByteArray;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -25,8 +23,8 @@ public class Product {
     private Integer stock;
 
     @Lob
-    @Column(name = "image_data", columnDefinition = "LONGBLOB")
-    private byte[] imageUrl;
+    @Column(name = "image_data", nullable = false, columnDefinition = "LONGBLOB")
+    private byte[] imageData;
 
     @Column(name = "brand_name", nullable = false)
     private String brandName;
@@ -46,13 +44,11 @@ public class Product {
     @Column(nullable = false)
     private Double rating;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "specification_id", nullable = false)
     private Specification specification;
 
-
     private String description;
-
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductReview> reviews;

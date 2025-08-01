@@ -37,7 +37,9 @@ public class UserProfileService {
         List<OrderHistoryDTO.OrderItemSummaryDTO> itemSummaries = order.getItems().stream()
                 .map(item -> {
                     String imageUrl = null;
-                    byte[] imageData = item.getProduct().getImageUrl();
+                    // --- THIS IS THE CORRECTED LINE ---
+                    // Changed from getImageUrl() to getImageData() to match the Product entity
+                    byte[] imageData = item.getProduct().getImageData();
                     if (imageData != null && imageData.length > 0) {
                         imageUrl = "data:image/jpeg;base64," + Base64.getEncoder().encodeToString(imageData);
                     }
